@@ -192,7 +192,7 @@ source $BIN_DIR/steps/hooks/post_compile
 # ### Fin.
 
 # Install GEOS
-if [ ! -d $CACHE_DIR/gdal ]; then
+if [ ! -d $CACHE_DIR/geos ]; then
   cd $BUILD_DIR
   echo "-----> Fetching and installing GEOS 3.3.2"
   curl -O https://s3.amazonaws.com/cirheroku/geos-3.3.2-herkou.tar.gz >/dev/null 2>&1
@@ -204,7 +204,7 @@ if [ ! -d $CACHE_DIR/gdal ]; then
 fi
 
 # Install Proj.4
-if [ ! -d $CACHE_DIR/gdal ]; then
+if [ ! -d $CACHE_DIR/proj4 ]; then
   cd $BUILD_DIR
   echo "-----> Fetching and installing Proj.4 4.7.0"
   curl -O https://s3.amazonaws.com/cirheroku/proj4-4.7.0-heroku.tar.gz >/dev/null 2>&1
