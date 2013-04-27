@@ -204,7 +204,7 @@ fi
 
 # Create set-aside .geodjango folder and copy compiled files
 mkdir -p .geodjango
-cp -R $CACHE_DIR/geos .gis
+cp -R $CACHE_DIR/geos .gis/geos
 cp -R $CACHE_DIR/proj4 .gis
 cp -R $CACHE_DIR/gdal .gis
 
