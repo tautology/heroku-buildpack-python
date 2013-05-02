@@ -159,13 +159,6 @@ if (grep -Fiq "hg+" requirements.txt) then
   /app/.heroku/python/bin/pip install --use-mirrors mercurial | cleanup | indent
 fi
 
-# Install dependencies with Pip.
-puts-step "Installing dependencies using Pip ($PIP_VERSION)"
-/app/.heroku/python/bin/pip install --use-mirrors -r requirements.txt --exists-action=w --src=./.heroku/src | cleanup | indent
-
-# Django collectstatic support.
-source $BIN_DIR/steps/collectstatic
-
 # Install GEOS
 if [ ! -d $CACHE_DIR/geos ]; then
   cd $BUILD_DIR
@@ -202,11 +195,18 @@ if [ ! -d $CACHE_DIR/gdal ]; then
   puts-step "GDAL installed" | indent
 fi
 
-# Create set-aside .geodjango folder and copy compiled files
-mkdir -p .gis
+# Create .geodjango folder and copy compiled files
+mkdir -p .geodjango
 cp -R $CACHE_DIR/geos .geodjango
 cp -R $CACHE_DIR/proj4 .geodjango
 cp -R $CACHE_DIR/gdal .geodjango
+
+# Install dependencies with Pip.
+puts-step "Installing dependencies using Pip ($PIP_VERSION)"
+/app/.heroku/python/bin/pip install --use-mirrors -r requirements.txt --exists-action=w --src=./.heroku/src | cleanup | indent
+
+# Django collectstatic support.
+source $BIN_DIR/steps/collectstatic
 
 # ### Finalize
 #
